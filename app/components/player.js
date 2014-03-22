@@ -77,6 +77,7 @@ Crafty.c("Player", {
             this.lives--;
 
             if (this.lives < 0) {
+                this.lives = 0;
                 Crafty.scene('GameOver');
             } else {
                 this.reset();
