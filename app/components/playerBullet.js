@@ -2,7 +2,12 @@ Crafty.c('PlayerBullet', {
     velocity: 24,
 
     init: function () {
-        this.requires("2D,Canvas,spr_player_bullet,Collision");
+        this.requires("2D,Canvas,spr_player_bullet,Collision")
+            .onHit('Enemy', function (entities) {
+                var entity = entities[0]['obj'];
+                entity.damage();
+                this.explode(entity);
+            });
 
         Crafty.audio.play('shot');
     },
@@ -18,12 +23,20 @@ Crafty.c('PlayerBullet', {
         return this;
     },
 
+    explode: function (entity) {
+        Crafty.audio.play('hit');
+
+        Crafty.e('Explosion').launch(entity);
+
+        this.destroy();
+    },
+
     moveBullet: function () {
         if (this.x + this.w > Game.width() || this.x + this.w < 0 ||
             this.y + this.h > Game.height() || this.y + this.h < 0) {
 
             // out of sight
-            this.die();
+            this.destroy();
 
         } else {
 
@@ -35,14 +48,4 @@ Crafty.c('PlayerBullet', {
             this.attr({x: this.x + move_x, y: this.y + move_y});
         }
     },
-
-    hit: function () {
-
-    },
-
-    die: function () {
-        this.destroy();
-
-        return this;
-    }
 });

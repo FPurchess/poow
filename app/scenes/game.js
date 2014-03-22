@@ -2,7 +2,7 @@ Crafty.scene('Game', function () {
 
     Game.HUD.show();
 
-    this.player = Crafty.e('Player');
+    Game.player = Crafty.e('Player');
 
     Crafty.e('Enemy').spawn();
     Crafty.e("Delay").delay(function () {
@@ -10,39 +10,5 @@ Crafty.scene('Game', function () {
     }, 2500, -1);
 
 //    Crafty.audio.play("background_music-01", -1, 0.4);
-
-//    var options = {
-//        maxParticles: 150,
-//        size: 20,
-//        sizeRandom: 0,
-//        speed: 1,
-//        speedRandom: 1.2,
-//        // Lifespan in frames
-//        lifeSpan: 50,
-//        lifeSpanRandom: 7,
-//        // Angle is calculated clockwise: 12pm is 0deg, 3pm is 90deg etc.
-//        angle: 65,
-//        angleRandom: 360,
-//        startColour: [255, 131, 0, 1],
-//        startColourRandom: [48, 50, 45, 0],
-//        endColour: [245, 35, 0, 0],
-//        endColourRandom: [60, 60, 60, 0],
-//        // Only applies when fastMode is off, specifies how sharp the gradients are drawn
-//        sharpness: 100,
-////        sharpnessRandom: 10,
-//        // Random spread from origin
-//        spread: 10,
-//        // How many frames should this last
-//        duration: -1,
-//        // Will draw squares instead of circle gradients
-//        fastMode: true,
-//        gravity: { x: 0, y: 0 },
-//        // sensible values are 0-3
-//        jitter: 0
-//    };
-//
-//    Crafty.e("2D,Canvas,Particles")
-//        .particles(options)
-//        .attr({x: Game.width() / 2, y: Game.height() / 2});
 
 });

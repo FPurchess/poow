@@ -1,5 +1,5 @@
 Crafty.c('Enemy', {
-    shield: 100,
+    shield: 3,
     score: 100,
     movementSpeed: 8,
     moveCounter: 0,
@@ -28,6 +28,16 @@ Crafty.c('Enemy', {
             this.x += this.movementSpeed;
             this.moveCounter++;
         } else {
+            this.die();
+        }
+    },
+
+    damage: function() {
+        this.shield--;
+
+        if (this.shield <= 0) {
+            Game.player.score += this.score;
+            Game.HUD.setScore(Game.player.score);
             this.die();
         }
     },

@@ -4,10 +4,10 @@ Crafty.c('EnemyBullet', {
     init: function () {
         this.requires("2D,Canvas,spr_enemy_bullet,Collision")
             .onHit("Player", function (entities) {
-                for (var idx=0; idx < entities.length; idx++) {
-                    entities[idx]['obj'].damage();
-                }
-                this.destroy();
+                //TODO error prone?
+                var entity = entities[0]['obj'];
+                entity.damage();
+                this.explode(entity);
             });
     },
 
@@ -20,6 +20,12 @@ Crafty.c('EnemyBullet', {
         });
 
         return this;
+    },
+
+    explode: function (entity) {
+        Crafty.audio.play('hit');
+        Crafty.e('Explosion').launch(entity);
+        this.destroy();
     },
 
     moveBullet: function () {
