@@ -20,7 +20,9 @@ Crafty.scene('Loading', function () {
     ], function () {
         Crafty.sprite('public/images/ship1.png', {spr_enemy: [0, 0, 63, 50]});
         Crafty.sprite('public/images/ship2.png', {spr_player: [0, 0, 63, 50]});
-        Crafty.sprite('public/images/bullet.jpg', {spr_bullet: [0, 0, 50, 50]});
+
+        Crafty.sprite('public/images/bullet_01.png', {spr_enemy_bullet: [0, 0, 9, 20]});
+        Crafty.sprite('public/images/bullet_02.png', {spr_player_bullet: [0, 0, 9, 20]});
 
         // start!
         Crafty.scene('Game');

@@ -15,10 +15,13 @@ Crafty.c("Player", {
             .reset();
 
         this.bind('EnterFrame', function (e) {
+            //TODO dynamic velocity
+            //TODO angles seem to be wrong
 
             // shoot!
             if (this.isDown(Crafty.keys.SPACE)) {
                 // todo shoot
+                Crafty.e('PlayerBullet').spawn(this.x + this.w/2, this.y + this.h / 2, this.angle + 180);
                 console.log('shoot!');
             }
 

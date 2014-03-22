@@ -3,7 +3,7 @@ exports.config =
     'watched': ['app', 'vendors',]
     'public': 'public'
 
-  sourceMaps: yes
+  sourceMaps: no
   optimize: yes
 
   modules:

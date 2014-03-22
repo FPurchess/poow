@@ -1,8 +1,9 @@
 Crafty.c('Enemy', {
     shield: 100,
     score: 100,
-    velocity: 8,
-    shootDistanceInterval: 80,  // distance travelled until next bullet is fired
+    movementSpeed: 8,
+    moveCounter: 0,
+    shootInterval: 10,  // number of moves until next bullet is fired
 
     init: function() {
         this.requires("2D,Canvas,spr_enemy,Collision");
@@ -11,28 +12,29 @@ Crafty.c('Enemy', {
     spawn: function() {
         console.log('Enemy::spawn');
 
-        this.attr({x: -this.w, y: Game.height() / 2});
+        this.attr({x: -this.w, y: randInt(0, Game.height() - 50)});
         this.rotation = 90;
 
-        var that = this;
         this.bind("EnterFrame", function() {
-            that.move();
-            that.shoot();
+            this.moveEnemy();
+            this.shootBullet();
         });
 
         return this;
     },
 
-    move: function() {
+    moveEnemy: function() {
         if (this.x < Game.width()) {
-            this.x += this.velocity;
+            this.x += this.movementSpeed;
+            this.moveCounter++;
         } else {
             this.die();
         }
     },
 
-    shoot: function() {
-        if (this.x % this.shootDistanceInterval == 0) {
+    shootBullet: function() {
+        if (this.moveCounter % this.shootInterval == 0) {
+            console.log("shooting bullet!");
             Crafty.e('EnemyBullet').spawn(this.x, this.y);
         }
     },

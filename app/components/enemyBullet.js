@@ -2,7 +2,7 @@ Crafty.c('EnemyBullet', {
     velocity: 24,
 
     init: function() {
-        this.requires("2D,Canvas,spr_bullet,Collision");
+        this.requires("2D,Canvas,spr_enemy_bullet,Collision");
     },
 
     spawn: function(x, y) {
@@ -12,18 +12,22 @@ Crafty.c('EnemyBullet', {
         this.rotation = 90;
 
         this.bind("EnterFrame", function() {
-            this.move();
+            this.moveBullet();
         });
 
         return this;
     },
 
-    move: function() {
+    moveBullet: function() {
         if (this.x < Game.width()) {
             this.x += this.velocity;
         } else {
             this.die();
         }
+    },
+
+    hit: function() {
+
     },
 
     die: function() {
