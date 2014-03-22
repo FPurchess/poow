@@ -1,27 +1,9 @@
 Crafty.scene('Game', function () {
 
-    Crafty.e('2D, DOM, Text')
-        .text('Score: ')
-        .attr({ x: 20, y: 15, w: 200 })
-        .textFont($text_css)
-        .css($text_css)
-        .css($text_hud);
-
-    Crafty.e('2D, DOM, Text')
-        .text('Shield: ')
-        .attr({ x: Game.width() - 300, y: 15, w: 200 })
-        .textFont($text_css)
-        .css($text_css)
-        .css($text_hud);
-
-    Crafty.e('2D, DOM, Text')
-        .text('Lives: ')
-        .attr({ x: Game.width() - 150, y: 15, w: 200 })
-        .textFont($text_css)
-        .css($text_css)
-        .css($text_hud);
-
     this.player = Crafty.e('Player');
+//    Crafty.viewport.follow(this.player, 0, 0);
+
+    Crafty.e('Enemy').spawn();
 
 //    var options = {
 //        maxParticles: 150,
