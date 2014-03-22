@@ -1,64 +1,75 @@
 Crafty.c("Player", {
-    shield: 10,
     velocity: 8,
     speed: 0,
     angle: 0,
-    lives: 3,
+
     score: 0,
+    lives: 3,
+    shield: 10,
 
     init: function () {
         this.requires("2D,Canvas,spr_player,Keyboard,Collision")
+            .reset()
             .origin('center')
-            .reset();
+            .bind('EnterFrame', function (e) {
+                //TODO dynamic velocity
+                //TODO angles seem to be wrong
 
-        this.bind('EnterFrame', function (e) {
-            //TODO dynamic velocity
-            //TODO angles seem to be wrong
+                // shoot!
+                if (this.isDown(Crafty.keys.SPACE)) {
+                    this.shootBullet();
+                }
 
-            // shoot!
-            if (this.isDown(Crafty.keys.SPACE)) {
-                this.shootBullet();
-            }
+                // left.
+                if (this.isDown(Crafty.keys.LEFT_ARROW)) {
+                    this.angle -= this.velocity;
+                }
 
-            // left.
-            if (this.isDown(Crafty.keys.LEFT_ARROW)) {
-                this.angle -= this.velocity;
-            }
+                // right.
+                if (this.isDown(Crafty.keys.RIGHT_ARROW)) {
+                    this.angle += this.velocity;
+                }
 
-            // right.
-            if (this.isDown(Crafty.keys.RIGHT_ARROW)) {
-                this.angle += this.velocity;
-            }
+                // forward.
+                if (this.isDown(Crafty.keys.UP_ARROW)) {
+                    this.speed = this.velocity;
+                }
 
-            // forward.
-            if (this.isDown(Crafty.keys.UP_ARROW)) {
-                this.speed = this.velocity;
-            }
+                // backward.
+                if (this.isDown(Crafty.keys.UP_ARROW)) {
+                    this.speed = -this.velocity;
+                }
 
-            // backward.
-            if (this.isDown(Crafty.keys.UP_ARROW)) {
-                this.speed = -this.velocity;
-            }
+                this.maneuver();
 
-            this.maneuver();
+            });
 
-        });
-
-        console.log('Player::init');
         return this;
     },
 
-    damage: function() {
-        this.shield--;
-        Game.HUD.setShield(this.shield);
+    damage: function () {
         Crafty.audio.play('hit');
 
+        this.shield--;
+
+        if (this.shield <= 0) {
+            this.lives--;
+
+            if (this.lives <= 0) {
+                Crafty.scene('GameOver');
+            }
+
+            this.reset();
+        }
+
+        Crafty.trigger("UpdateStats");
+
         return this;
     },
 
-    shootBullet: function() {
+    shootBullet: function () {
         Crafty.e('PlayerBullet').spawn(
-            this.x + this.w/2,
+            this.x + this.w / 2,
             this.y + this.h / 2,
             this.angle + 180
         );
@@ -66,7 +77,7 @@ Crafty.c("Player", {
         return this;
     },
 
-    maneuver: function() {
+    maneuver: function () {
         var rad_angle = Crafty.math.degToRad(this.angle + 90),
             move_x = this.speed * Math.cos(rad_angle),
             move_y = this.speed * Math.sin(rad_angle);
@@ -76,14 +87,9 @@ Crafty.c("Player", {
     },
 
     reset: function () {
-        this.lives = 3;
+        this.speed = 0;
+        this.angle = 0;
         this.shield = 10;
-
-        Game.HUD.setShield(this.shield);
-        Game.HUD.setLives(this.lives);
-
-
-        Crafty.trigger("UpdateStats");
 
         this.attr({
             x: Crafty.viewport.width / 2 - this.w / 2,

@@ -6,21 +6,14 @@ Crafty.c('Enemy', {
     shootInterval: 10,  // number of moves until next bullet is fired
 
     init: function () {
-        this.requires("2D,Canvas,spr_enemy,Collision");
-    },
+        this.requires("2D,Canvas,spr_enemy,Collision")
+            .attr({x: -this.w, y: randInt(0, Game.height() - 50)})
+            .bind("EnterFrame", function () {
+                this.moveEnemy();
+                this.shootBullet();
+            });
 
-    spawn: function () {
-        console.log('Enemy::spawn');
-
-        this.attr({x: -this.w, y: randInt(0, Game.height() - 50)});
         this.rotation = 90;
-
-        this.bind("EnterFrame", function () {
-            this.moveEnemy();
-            this.shootBullet();
-        });
-
-        return this;
     },
 
     moveEnemy: function () {
@@ -32,7 +25,7 @@ Crafty.c('Enemy', {
         }
     },
 
-    damage: function() {
+    damage: function () {
         this.shield--;
 
         if (this.shield <= 0) {
