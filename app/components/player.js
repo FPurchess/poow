@@ -1,5 +1,6 @@
 Crafty.c("Player", {
-    velocity: 8,
+    velocity: 2,
+    maxSpeed: 10,
     speed: 0,
     angle: 0,
 
@@ -12,7 +13,7 @@ Crafty.c("Player", {
             .reset()
             .origin('center')
             .bind('EnterFrame', function (e) {
-                //TODO dynamic velocity
+                var has_accelerated = false;
                 //TODO angles seem to be wrong
 
                 // shoot!
@@ -22,23 +23,44 @@ Crafty.c("Player", {
 
                 // left.
                 if (this.isDown(Crafty.keys.LEFT_ARROW)) {
-                    this.angle -= this.velocity;
+                    this.angle -= this.maxSpeed;
                 }
 
                 // right.
                 if (this.isDown(Crafty.keys.RIGHT_ARROW)) {
-                    this.angle += this.velocity;
+                    this.angle += this.maxSpeed;
                 }
 
                 // forward.
                 if (this.isDown(Crafty.keys.UP_ARROW)) {
-                    this.speed = this.velocity;
+                    this.speed -= this.velocity;
+                    has_accelerated = true;
                 }
 
                 // backward.
-                if (this.isDown(Crafty.keys.UP_ARROW)) {
-                    this.speed = -this.velocity;
+                if (this.isDown(Crafty.keys.DOWN_ARROW)) {
+                    this.speed += this.velocity;
+                    has_accelerated = true;
                 }
+
+                // Gravitation
+                if (!has_accelerated) {
+                    if (this.speed > 0) {
+                        this.speed -= Game.gravity();
+
+                        if (this.speed < 0) {
+                            this.speed = 0;
+                        }
+                    } else {
+                        this.speed += Game.gravity();
+
+                        if (this.speed > 0) {
+                            this.speed = 0;
+                        }
+                    }
+                }
+
+                this.speed = Crafty.math.clamp(this.speed, -this.maxSpeed, this.maxSpeed);
 
                 this.maneuver();
 

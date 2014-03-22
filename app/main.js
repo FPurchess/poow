@@ -2,8 +2,13 @@ Game = {
     width: function () {
         return Crafty.DOM.window.width;
     },
+
     height: function () {
         return Crafty.DOM.window.height;
+    },
+
+    gravity: function() {
+        return 0.2;
     },
 
     start: function () {
