@@ -8,7 +8,7 @@ Game = {
 
     start: function () {
         Crafty.init();
-        Crafty.background('#000');
+        Crafty.background('#000 url(public/images/bg-tile.png) center center repeat');
 
         Crafty.scene('Loading');
     }
