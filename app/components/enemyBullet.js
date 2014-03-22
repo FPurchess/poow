@@ -12,18 +12,22 @@ Crafty.c('EnemyBullet', {
         this.rotation = 90;
 
         this.bind("EnterFrame", function() {
-            this.move();
+            this.moveBullet();
         });
 
         return this;
     },
 
-    move: function() {
+    moveBullet: function() {
         if (this.x < Game.width()) {
             this.x += this.movementSpeed;
         } else {
             this.die();
         }
+    },
+
+    hit: function() {
+
     },
 
     die: function() {

@@ -6,7 +6,10 @@ Crafty.scene('Game', function () {
     this.player = Crafty.e('Player');
 //    Crafty.viewport.follow(this.player, 0, 0);
 
-//    Crafty.e('Enemy').spawn();
+    Crafty.e('Enemy').spawn();
+    Crafty.e("Delay").delay(function() {
+        Crafty.e('Enemy').spawn();
+    }, 2500, -1);
 
     Crafty.audio.play("background_music-01", -1);
 
