@@ -4,19 +4,23 @@ Crafty.c('HUD', {
     shield: 0,
 
     init: function () {
-
         this.$_hud = $('#HUD');
 
-        this.$_score = $('.hud-score .value', this.$_hud).text(this.score);
-        this.$_lives = $('.hud-lives .value', this.$_hud).text(this.lives);
-        this.$_shield = $('.hud-shield .value', this.$_hud).text(this.shield);
+        this.$_score = $('.hud-score .value', this.$_hud);
+        this.$_lives = $('.hud-lives .value', this.$_hud);
+        this.$_shield = $('.hud-shield .value', this.$_hud);
 
+        this.reset();
+
+        return this;
     },
 
-    clear: function () {
-        this.$_score.text('');
-        this.$_lives.text('');
-        this.$_shield.text('');
+    reset: function () {
+        this.setScore(0);
+        this.setLives(0);
+        this.setShield(0);
+
+        return this;
     },
 
     hide: function () {
@@ -25,7 +29,7 @@ Crafty.c('HUD', {
     },
 
     show: function () {
-        this.$_hud.hide();
+        this.$_hud.show();
         return this;
     },
 

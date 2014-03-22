@@ -1,5 +1,8 @@
 Crafty.scene('Game', function () {
 
+    this.hud = Crafty.e('HUD');
+    this.hud.show();
+
     this.player = Crafty.e('Player');
 //    Crafty.viewport.follow(this.player, 0, 0);
 
