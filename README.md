@@ -13,3 +13,9 @@ $ brunch watch
 ```
 
 ready. set. hack!
+
+
+licenses
+--------
+
+Gracious Background Music by Kevin MacLeod (incompetech.com)

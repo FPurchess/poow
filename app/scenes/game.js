@@ -8,6 +8,8 @@ Crafty.scene('Game', function () {
 
     Crafty.e('Enemy').spawn();
 
+//    Crafty.audio.play("background_music-01", -1);
+
 //    var options = {
 //        maxParticles: 150,
 //        size: 20,

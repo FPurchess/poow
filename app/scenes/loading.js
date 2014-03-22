@@ -7,11 +7,20 @@ Crafty.scene('Loading', function () {
         .css($text_css);
 
 
+    // loading...
+
     Crafty.load([
+
+        // sprites
         'assets/player.png',
+
+        // audio
+        'public/music/ouroboros.mp3'
+
     ], function () {
         Crafty.sprite('assets/player.png', {spr_player: [0, 0, 50, 50]});
 
+        // start!
         Crafty.scene('Game');
     });
 
