@@ -6,9 +6,9 @@ Crafty.scene('Game', function () {
     this.player = Crafty.e('Player');
 //    Crafty.viewport.follow(this.player, 0, 0);
 
-    Crafty.e('Enemy').spawn();
+//    Crafty.e('Enemy').spawn();
 
-//    Crafty.audio.play("background_music-01", -1);
+    Crafty.audio.play("background_music-01", -1);
 
 //    var options = {
 //        maxParticles: 150,

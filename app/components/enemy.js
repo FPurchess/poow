@@ -5,7 +5,7 @@ Crafty.c('Enemy', {
     shootDistanceInterval: 80,  // distance travelled until next bullet is fired
 
     init: function() {
-        this.requires("2D,Canvas,spr_player,Collision");
+        this.requires("2D,Canvas,spr_enemy,Collision");
     },
 
     spawn: function() {
@@ -14,9 +14,10 @@ Crafty.c('Enemy', {
         this.attr({x: -this.w, y: Game.height() / 2});
         this.rotation = 90;
 
+        var that = this;
         this.bind("EnterFrame", function() {
-            this.move();
-            this.shoot();
+            that.move();
+            that.shoot();
         });
 
         return this;
