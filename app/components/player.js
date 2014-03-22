@@ -3,23 +3,60 @@ Crafty.c("Player", {
         current: 10,
         max: 10
     },
-    movementSpeed: 8,
+    velocity: 8,
+    speed: 0,
     angle: 0,
     lives: 3,
     score: 0,
 
     init: function () {
-        this.requires("2D,Canvas,spr_player,Multiway,Collision")
-            .multiway(this.movementSpeed, {
-                UP_ARROW: -90,
-                DOWN_ARROW: 90,
-                RIGHT_ARROW: 0,
-                LEFT_ARROW: 180
-            })
+        this.requires("2D,Canvas,spr_player,Keyboard,Collision")
+            .origin('center')
             .reset();
+
+        this.bind('EnterFrame', function (e) {
+
+            // shoot!
+            if (this.isDown(Crafty.keys.SPACE)) {
+                // todo shoot
+                console.log('shoot!');
+            }
+
+            // left.
+            if (this.isDown(Crafty.keys.LEFT_ARROW)) {
+                this.angle -= this.velocity;
+            }
+
+            // right.
+            if (this.isDown(Crafty.keys.RIGHT_ARROW)) {
+                this.angle += this.velocity;
+            }
+
+            // forward.
+            if (this.isDown(Crafty.keys.UP_ARROW)) {
+                this.speed = this.velocity;
+            }
+
+            // backward.
+            if (this.isDown(Crafty.keys.UP_ARROW)) {
+                this.speed = -this.velocity;
+            }
+
+            this.maneuver();
+
+        });
 
         console.log('Player::init');
         return this;
+    },
+
+    maneuver: function() {
+        var rad_angle = Crafty.math.degToRad(this.angle + 90),
+            move_x = this.speed * Math.cos(rad_angle),
+            move_y = this.speed * Math.sin(rad_angle);
+
+        this.rotation = this.angle;
+        this.attr({x: this.x + move_x, y: this.y + move_y});
     },
 
     reset: function () {

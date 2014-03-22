@@ -1,7 +1,7 @@
 Crafty.c('Enemy', {
     shield: 100,
     score: 100,
-    movementSpeed: 8,
+    velocity: 8,
     shootDistanceInterval: 80,  // distance travelled until next bullet is fired
 
     init: function() {
@@ -25,7 +25,7 @@ Crafty.c('Enemy', {
 
     move: function() {
         if (this.x < Game.width()) {
-            this.x += this.movementSpeed;
+            this.x += this.velocity;
         } else {
             this.die();
         }

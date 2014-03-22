@@ -1,5 +1,5 @@
 Crafty.c('EnemyBullet', {
-    movementSpeed: 24,
+    velocity: 24,
 
     init: function() {
         this.requires("2D,Canvas,spr_bullet,Collision");
@@ -20,7 +20,7 @@ Crafty.c('EnemyBullet', {
 
     move: function() {
         if (this.x < Game.width()) {
-            this.x += this.movementSpeed;
+            this.x += this.velocity;
         } else {
             this.die();
         }

@@ -15,13 +15,8 @@ Game = {
 
 };
 
-
 $text_css = {
     color: '#ffffff',
     size: '20px',
     family: 'Orbitron'
-};
-
-$text_hud = {
-    color: 'rgba(30,230,30,0.7)'
 };
