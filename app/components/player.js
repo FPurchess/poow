@@ -73,15 +73,14 @@ Crafty.c("Player", {
         Crafty.audio.play('hit');
 
         this.shield--;
-
         if (this.shield <= 0) {
             this.lives--;
 
             if (this.lives <= 0) {
                 Crafty.scene('GameOver');
+            } else {
+                this.reset();
             }
-
-            this.reset();
         }
 
         Crafty.trigger("UpdateStats");

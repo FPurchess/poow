@@ -8,7 +8,7 @@ Game = {
     },
 
     gravity: function() {
-        return 0.2;
+        return 0.1;
     },
 
     start: function () {
