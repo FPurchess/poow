@@ -2,14 +2,13 @@ Crafty.c('PlayerBullet', {
     velocity: 24,
 
     init: function () {
-        this.requires("2D,Canvas,spr_player_bullet,Collision")
-            .origin('center');
+        this.requires("2D,Canvas,spr_player_bullet,Collision");
 
         Crafty.audio.play('shot');
     },
 
     spawn: function (x, y, rotation) {
-        this.attr({x: x, y: y});
+        this.attr({x: x + this.w / 2, y: y + this.w / 2});
         this.rotation = rotation;
 
         this.bind("EnterFrame", function () {

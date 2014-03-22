@@ -10,6 +10,8 @@ Game = {
         Crafty.init();
         Crafty.background('#000 url(public/images/bg-tile.png) center center repeat');
 
+        this.HUD = Crafty.e('HUD');
+
         Crafty.scene('Loading');
     }
 

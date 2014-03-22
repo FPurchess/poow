@@ -11,3 +11,10 @@ Crafty.audio.add("game_over", [
 Crafty.audio.add("shot", [
     "public/fx/shot.mp3"
 ]);
+
+
+Crafty.audio.add("hit", [
+    "public/fx/explosion-01.ogg",
+    "public/fx/explosion-01.wav",
+    "public/fx/explosion-01.mp3"
+]);

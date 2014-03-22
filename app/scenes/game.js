@@ -1,7 +1,6 @@
 Crafty.scene('Game', function () {
 
-    this.hud = Crafty.e('HUD');
-    this.hud.show();
+    Game.HUD.show();
 
     this.player = Crafty.e('Player');
 
@@ -10,7 +9,7 @@ Crafty.scene('Game', function () {
         Crafty.e('Enemy').spawn();
     }, 2500, -1);
 
-    Crafty.audio.play("background_music-01", -1, 0.4);
+//    Crafty.audio.play("background_music-01", -1, 0.4);
 
 //    var options = {
 //        maxParticles: 150,

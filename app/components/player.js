@@ -1,8 +1,5 @@
 Crafty.c("Player", {
-    shield: {
-        current: 10,
-        max: 10
-    },
+    shield: 10,
     velocity: 8,
     speed: 0,
     angle: 0,
@@ -20,9 +17,7 @@ Crafty.c("Player", {
 
             // shoot!
             if (this.isDown(Crafty.keys.SPACE)) {
-                // todo shoot
-                Crafty.e('PlayerBullet').spawn(this.x + this.w/2, this.y + this.h / 2, this.angle + 180);
-                console.log('shoot!');
+                this.shootBullet();
             }
 
             // left.
@@ -53,6 +48,24 @@ Crafty.c("Player", {
         return this;
     },
 
+    damage: function() {
+        this.shield--;
+        Game.HUD.setShield(this.shield);
+        Crafty.audio.play('hit');
+
+        return this;
+    },
+
+    shootBullet: function() {
+        Crafty.e('PlayerBullet').spawn(
+            this.x + this.w/2,
+            this.y + this.h / 2,
+            this.angle + 180
+        );
+
+        return this;
+    },
+
     maneuver: function() {
         var rad_angle = Crafty.math.degToRad(this.angle + 90),
             move_x = this.speed * Math.cos(rad_angle),
@@ -63,10 +76,12 @@ Crafty.c("Player", {
     },
 
     reset: function () {
-        this.shield = {
-            current: 10,
-            max: 10
-        };
+        this.lives = 3;
+        this.shield = 10;
+
+        Game.HUD.setShield(this.shield);
+        Game.HUD.setLives(this.lives);
+
 
         Crafty.trigger("UpdateStats");
 
