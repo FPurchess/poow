@@ -6,8 +6,13 @@ Crafty.scene('Loading', function () {
         .css({textAlign: 'center'})
         .css($text_css);
 
-    window.setTimeout(function () {
+
+    Crafty.load([
+        'assets/player.png',
+    ], function () {
+        Crafty.sprite('assets/player.png', {spr_player: [0, 0, 50, 50]});
+
         Crafty.scene('Game');
-    }, 0);
+    });
 
 });
